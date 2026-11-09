@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vendor Map</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --background: #0f0b1a;
+  --foreground: #f6f1ea;
+  --primary: #ff2e88;
+  --primary-foreground: #0f0b1a;
+  --muted: #1c1530;
+  --muted-foreground: #b5a9c9;
+  --border: #332a4a;
+  --accent: #28e0b0;
+  --card: #171024;
+  --font-heading: 'Chakra Petch', Georgia, serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --radius: 10px;
+}
+html, body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-body); }
+
+[data-goto],button,a[href]{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+[data-goto]:hover,button:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.m-t{opacity:0;transform:translateY(var(--m-rise)) scale(var(--m-scale));transition:opacity var(--m-ms) var(--m-ease),transform var(--m-ms) var(--m-ease);transition-delay:var(--m-delay,0ms)}
+img.m-t{transform:scale(1.06)}
+.m-t.m-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.m-t{opacity:1;transform:none;transition:none}[data-goto]:hover,button:hover{transform:none}}
+</style>
+</head>
+<body>
+<!-- navigation -->
+<nav class="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur border-b border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-center justify-between h-16 md:h-20 gap-4">
+
+      <!-- Brand -->
+      <a href="#" data-goto="home" class="flex items-center gap-3 shrink-0 group">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)]">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true">
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>
+            <circle cx="12" cy="12" r="3.2"/>
+          </svg>
+        </span>
+        <span class="text-[var(--foreground)] text-base md:text-lg font-semibold tracking-tight" style="font-family:var(--font-heading)">Neon Alley Nights</span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="hidden md:flex items-center gap-8">
+        <li>
+          <a href="#" data-goto="home" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Home</a>
+        </li>
+        <li>
+          <a href="#" data-goto="tickets" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Tickets</a>
+        </li>
+        <li>
+          <a href="#" data-goto="vendor-map" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Vendor Map</a>
+        </li>
+        <li>
+          <a href="#" data-goto="stalls" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Stalls</a>
+        </li>
+      </ul>
+
+      <!-- CTA -->
+      <a href="#" data-goto="tickets" class="inline-flex items-center justify-center rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)] px-4 md:px-6 h-10 text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity" style="font-family:var(--font-heading)">Get Tickets</a>
+
+    </div>
+
+    <!-- Mobile links -->
+    <div class="md:hidden pb-4 -mt-1">
+      <ul class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <li><a href="#" data-goto="home" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Home</a></li>
+        <li><a href="#" data-goto="tickets" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Tickets</a></li>
+        <li><a href="#" data-goto="vendor-map" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Vendor Map</a></li>
+        <li><a href="#" data-goto="stalls" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Stalls</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- hero -->
+<!-- I'm building the vendor-map hero with heading, copy and a ticket CTA. -->
+<section class="bg-[var(--background)] text-[var(--foreground)]">
+  <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid gap-12 md:grid-cols-2 md:items-center">
+    <!-- Kicker sets the neon night tone before the headline. -->
+    <div>
+      <p class="text-[var(--accent)] uppercase tracking-[0.25em] text-xs mb-5">Vendor Map</p>
+      <h1 class="text-4xl md:text-6xl leading-[1.05] mb-6" style="font-family:var(--font-heading)">Neon Alley, end to end.</h1>
+      <p class="text-[var(--muted-foreground)] text-base md:text-lg leading-relaxed max-w-xl">The whole festival strip in one glowing map — 84 stalls across four alley zones, three lantern gates, and every jade sign you'll be looking for on a March night.</p>
+      <!-- Opening hours as a jade sign chip. -->
+      <p class="inline-block mt-8 px-4 py-2 border border-[var(--border)] rounded-[var(--radius)] text-sm text-[var(--foreground)]">Open 17:00–01:00, Friday to Sunday</p>
+      <!-- CTA goes to the tickets page. -->
+      <div class="mt-8">
+        <a data-goto="tickets" class="inline-flex items-center justify-center bg-[var(--primary)] text-[var(--primary-foreground)] px-7 py-3 rounded-[var(--radius)] text-sm font-medium hover:opacity-90 transition-opacity" style="font-family:var(--font-heading)">Get Tickets</a>
+      </div>
+    </div>
+    <!-- Stylised map illustration box sits beside the copy. -->
+    <div class="aspect-[4/3] rounded-[var(--radius)] overflow-hidden border border-[var(--border)] bg-[var(--card)]">
+      <img data-gen="Stylised night map illustration of a festival alley, glowing magenta and jade stall markers, warm amber lantern gates, dark ink background" alt="Glowing illustrated map of the Neon Alley festival strip" class="w-full h-full object-cover rounded-[var(--radius)]" src="img/2.webp">
+    </div>
+  </div>
+</section>
+
+<!-- interactive alley map -->
+<section id="vendor-map-interactive-alley-map" class="bg-[var(--background)] py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div class="max-w-2xl">
+        <p class="text-xs uppercase tracking-[0.3em] text-[var(--accent)]">Interactive Alley Map</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">
+          Find any stall in three taps
+        </h2>
+        <p class="mt-4 text-[var(--muted-foreground)] leading-relaxed">
+          Tap the alley to explore. Drag to pan, pinch or scroll to zoom. Numbered pins mark every stall — tap a pin for the vendor name, signature dish, and price range.
+        </p>
+      </div>
+      <div class="shrink-0">
+        <button
+          data-goto="stalls"
+          class="inline-flex items-center gap-2 rounded-[var(--radius)] bg-[var(--primary)] px-5 py-3 text-sm font-medium text-[var(--primary-foreground)] transition-opacity hover:opacity-90"
+        >
+          Browse all stalls
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- say: Map canvas sits alone, legends move into normal flow below. -->
+    <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div class="lg:col-span-2 overflow-hidden rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)]">
+        <div class="relative aspect-[4/3] sm:aspect-[16/9] w-full">
+          <svg
+            class="absolute inset-0 h-full w-full"
+            viewBox="0 0 800 450"
+            preserveAspectRatio="xMidYMid slice"
+            role="img"
+            aria-label="Overhead map of the Neon Alley night market, with numbered stall pins and three gates"
+          >
+            <rect x="0" y="0" width="800" height="450" fill="var(--muted)" />
+
+            <path d="M0 400 C160 372 260 428 420 404 C580 380 660 424 800 396 L800 450 L0 450 Z"
+                  fill="var(--background)" opacity="0.85" />
+            <path d="M0 400 C160 372 260 428 420 404 C580 380 660 424 800 396"
+                  fill="none" stroke="var(--accent)" stroke-width="1.5" opacity="0.5" />
+
+            <rect x="38" y="150" width="120" height="150" rx="10" fill="var(--background)" opacity="0.55" />
+
+            <path d="M150 225 H700" stroke="var(--border)" stroke-width="46" stroke-linecap="round" opacity="0.7" />
+            <path d="M470 225 V390" stroke="var(--border)" stroke-width="34" stroke-linecap="round" opacity="0.55" />
+
+            <g fill="var(--background)" opacity="0.9">
+              <rect x="196" y="140" width="58" height="42" rx="6" />
+              <rect x="272" y="140" width="58" height="42" rx="6" />
+              <rect x="348" y="140" width="58" height="42" rx="6" />
+              <rect x="424" y="140" width="58" height="42" rx="6" />
+              <rect x="530" y="132" width="62" height="48" rx="6" />
+              <rect x="612" y="132" width="62" height="48" rx="6" />
+            </g>
+            <g fill="var(--background)" opacity="0.9">
+              <rect x="196" y="272" width="58" height="42" rx="6" />
+              <rect x="272" y="272" width="58" height="42" rx="6" />
+              <rect x="348" y="272" width="58" height="42" rx="6" />
+              <rect x="424" y="272" width="58" height="42" rx="6" />
+              <rect x="520" y="286" width="56" height="44" rx="6" />
+              <rect x="600" y="286" width="56" height="44" rx="6" />
+            </g>
+
+            <g stroke="var(--accent)" stroke-width="1.2" opacity="0.55" fill="none">
+              <path d="M210 112 C300 96 380 128 470 112" />
+              <path d="M470 112 C560 96 640 128 700 112" />
+            </g>
+            <g fill="var(--accent)" opacity="0.8">
+              <circle cx="252" cy="106" r="4" />
+              <circle cx="332" cy="118" r="4" />
+              <circle cx="412" cy="110" r="4" />
+              <circle cx="524" cy="108" r="4" />
+              <circle cx="604" cy="118" r="4" />
+              <circle cx="672" cy="110" r="4" />
+            </g>
+
+            <g font-family="var(--font-heading)" font-size="13" font-weight="600">
+              <g>
+                <rect x="42" y="192" width="76" height="28" rx="6" fill="var(--primary)" />
+                <text x="80" y="211" text-anchor="middle" fill="var(--primary-foreground)">GATE A</text>
+              </g>
+              <g>
+                <rect x="446" y="176" width="76" height="28" rx="6" fill="var(--primary)" opacity="0.85" />
+                <text x="484" y="195" text-anchor="middle" fill="var(--primary-foreground)">GATE B</text>
+              </g>
+              <g>
+                <rect x="640" y="368" width="76" height="28" rx="6" fill="var(--primary)" opacity="0.85" />
+                <text x="678" y="387" text-anchor="middle" fill="var(--primary-foreground)">GATE C</text>
+              </g>
+            </g>
+
+            <g font-family="var(--font-heading)" font-size="12" font-weight="700">
+              <g>
+                <circle cx="225" cy="161" r="14" fill="var(--accent)" />
+                <text x="225" y="166" text-anchor="middle" fill="var(--background)">1</text>
+              </g>
+              <g>
+                <circle cx="301" cy="161" r="14" fill="var(--accent)" />
+                <text x="301" y="166" text-anchor="middle" fill="var(--background)">2</text>
+              </g>
+              <g>
+                <circle cx="453" cy="161" r="14" fill="var(--accent)" />
+                <text x="453" y="166" text-anchor="middle" fill="var(--background)">4</text>
+              </g>
+              <g>
+                <circle cx="225" cy="293" r="14" fill="var(--accent)" />
+                <text x="225" y="298" text-anchor="middle" fill="var(--background)">7</text>
+              </g>
+              <g>
+                <circle cx="453" cy="293" r="14" fill="var(--accent)" />
+                <text x="453" y="298" text-anchor="middle" fill="var(--background)">10</text>
+              </g>
+
+              <g>
+                <circle cx="377" cy="161" r="14" fill="var(--primary)" />
+                <text x="377" y="166" text-anchor="middle" fill="var(--primary-foreground)">3</text>
+              </g>
+              <g>
+                <circle cx="561" cy="156" r="14" fill="var(--primary)" />
+                <text x="561" y="161" text-anchor="middle" fill="var(--primary-foreground)">5</text>
+              </g>
+              <g>
+                <circle cx="643" cy="156" r="14" fill="var(--primary)" />
+                <text x="643" y="161" text-anchor="middle" fill="var(--primary-foreground)">6</text>
+              </g>
+              <g>
+                <circle cx="301" cy="293" r="14" fill="var(--primary)" />
+                <text x="301" y="298" text-anchor="middle" fill="var(--primary-foreground)">8</text>
+              </g>
+              <g>
+                <circle cx="548" cy="308" r="14" fill="var(--primary)" />
+                <text x="548" y="313" text-anchor="middle" fill="var(--primary-foreground)">11</text>
+              </g>
+
+              <g>
+                <circle cx="377" cy="293" r="14" fill="var(--accent)" opacity="0.9" />
+                <text x="377" y="298" text-anchor="middle" fill="var(--background)">9</text>
+              </g>
+              <g>
+                <circle cx="628" cy="308" r="14" fill="var(--accent)" opacity="0.9" />
+                <text x="628" y="313" text-anchor="middle" fill="var(--background)">12</text>
+              </g>
+            </g>
+
+            <g opacity="0.7">
+              <circle cx="752" cy="42" r="18" fill="none" stroke="var(--border)" stroke-width="1.5" />
+              <path d="M752 30 L758 46 L752 42 L746 46 Z" fill="var(--foreground)" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- say: Gesture hint bar now sits under the map, not over it. -->
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[var(--border)] px-4 py-3 text-[11px] text-[var(--muted-foreground)] sm:px-6">
+          <span class="flex items-center gap-1.5">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M12 3v18M3 12h18" stroke-linecap="round" />
+            </svg>
+            Drag to pan
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="11" cy="11" r="6" />
+              <path d="M20 20l-4.2-4.2" stroke-linecap="round" />
+            </svg>
+            Pinch or scroll to zoom
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="12" cy="12" r="8" />
+              <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none" />
+            </svg>
+            Tap a pin for stall details
+          </span>
+        </div>
+      </div>
+
+      <!-- say: Legends stacked in the normal flow beside the map. -->
+      <div class="flex flex-col gap-4">
+        <div class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-4 text-xs">
+          <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted-foreground)]" style="font-family:var(--font-heading)">Pin legend</p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-[var(--foreground)]">
+              <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden="true"></span>
+              Jade — night-market classics
+            </li>
+            <li class="flex items-center gap-2 text-[var(--foreground)]">
+              <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--primary)]" aria-hidden="true"></span>
+              Magenta — sweets and drinks
+            </li>
+            <li class="flex items-center gap-2 text-[var(--foreground)]">
+              <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--accent)] opacity-70" aria-hidden="true"></span>
+              Amber — grilled and fried
+            </li>
+          </ul>
+        </div>
+
+        <div class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-4 text-xs">
+          <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted-foreground)]" style="font-family:var(--font-heading)">Zone legend</p>
+          <p class="mb-3 text-[var(--muted-foreground)]">Four zones, four moods.</p>
+          <ul class="space-y-2.5">
+            <li class="flex gap-2.5 text-[var(--foreground)]">
+              <span class="shrink-0 font-semibold text-[var(--accent)]" style="font-family:var(--font-heading)">01</span>
+              <span>Zone 1 — MRT entrance plaza</span>
+            </li>
+            <li class="flex gap-2.5 text-[var(--foreground)]">
+              <span class="shrink-0 font-semibold text-[var(--accent)]" style="font-family:var(--font-heading)">02</span>
+              <span>Zone 2 — Lantern row</span>
+            </li>
+            <li class="flex gap-2.5 text-[var(--foreground)]">
+              <span class="shrink-0 font-semibold text-[var(--accent)]" style="font-family:var(--font-heading)">
+
+<!-- zone legend -->
+<section class="bg-[var(--background)] py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl">
+      <p class="text-[var(--accent)] text-sm tracking-[0.2em] uppercase mb-4" style="font-family:var(--font-heading)">Zone Legend</p>
+      <h2 class="text-[var(--foreground)] text-3xl md:text-4xl font-semibold leading-tight" style="font-family:var(--font-heading)">Four zones, four moods.</h2>
+    </div>
+
+    <!-- say: Building a four-card grid, one card per alley zone. -->
+    <div class="grid gap-6 md:grid-cols-2 mt-12 md:mt-16">
+
+      <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7 md:p-8">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="flex items-center justify-center w-9 h-9 rounded-[var(--radius)] bg-[var(--muted)] text-[var(--accent)] text-sm font-semibold" style="font-family:var(--font-heading)">01</span>
+          <h3 class="text-[var(--foreground)] text-xl font-semibold" style="font-family:var(--font-heading)">Zone 1 — Lantern Row</h3>
+        </div>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">22 stalls of grilled skewers and smoke, Gate A to the first neon arch.</p>
+      </article>
+
+      <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7 md:p-8">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="flex items-center justify-center w-9 h-9 rounded-[var(--radius)] bg-[var(--muted)] text-[var(--accent)] text-sm font-semibold" style="font-family:var(--font-heading)">02</span>
+          <h3 class="text-[var(--foreground)] text-xl font-semibold" style="font-family:var(--font-heading)">Zone 2 — Jade Court</h3>
+        </div>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">18 stalls of noodles, dumplings and soup, centred on the courtyard tables.</p>
+      </article>
+
+      <!-- say: Second row mirrors the first with identical card rhythm. -->
+      <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7 md:p-8">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="flex items-center justify-center w-9 h-9 rounded-[var(--radius)] bg-[var(--muted)] text-[var(--accent)] text-sm font-semibold" style="font-family:var(--font-heading)">03</span>
+          <h3 class="text-[var(--foreground)] text-xl font-semibold" style="font-family:var(--font-heading)">Zone 3 — Magenta Market</h3>
+        </div>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">26 stalls of sweets, shaved ice and cocktails under pink neon.</p>
+      </article>
+
+      <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7 md:p-8">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="flex items-center justify-center w-9 h-9 rounded-[var(--radius)] bg-[var(--muted)] text-[var(--accent)] text-sm font-semibold" style="font-family:var(--font-heading)">04</span>
+          <h3 class="text-[var(--foreground)] text-xl font-semibold" style="font-family:var(--font-heading)">Zone 4 — Riverside Grill</h3>
+        </div>
+        <p class="text-[var(--muted-foreground)] leading-relaxed">18 charcoal stalls and the big seating deck by Gate C.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- filter by craving -->
+<section class="bg-[var(--background)] py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- say: Heading and intro kept, mobile wrap now roomy. -->
+    <div class="max-w-2xl">
+      <h2 class="text-3xl md:text-4xl font-semibold text-[var(--foreground)] tracking-tight" style="font-family:var(--font-heading)">Find your craving.</h2>
+      <p class="mt-4 text-base leading-relaxed text-[var(--muted-foreground)]">Filter the map by what you came for: Tap a craving and the alley dims everything else.</p>
+    </div>
+
+    <!-- say: Cards stacked full-width on phones so titles fit one line. -->
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <button type="button" class="group text-left bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-4 sm:p-5 transition-colors hover:border-[var(--accent)] focus:outline-none focus-visible:border-[var(--accent)]">
+        <span class="flex items-center gap-2.5 sm:gap-3">
+          <span class="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] bg-[var(--muted)] text-[var(--accent)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3c1.5 2.2 3 3.6 3 6a3 3 0 1 1-6 0c0-2.4 1.5-3.8 3-6Z"/>
+              <path d="M8 21h8"/>
+            </svg>
+          </span>
+          <span class="min-w-0 whitespace-nowrap text-[15px] sm:text-base lg:text-[17px] font-semibold leading-snug text-[var(--foreground)]" style="font-family:var(--font-heading)">Grilled &amp; Smoked</span>
+        </span>
+        <span class="mt-3 block text-sm text-[var(--muted-foreground)]">26 stalls, mostly Zones 1 and 4</span>
+      </button>
+
+      <!-- say: Second card mirrors the same single-line title treatment. -->
+      <button type="button" class="group text-left bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-4 sm:p-5 transition-colors hover:border-[var(--accent)] focus:outline-none focus-visible:border-[var(--accent)]">
+        <span class="flex items-center gap-2.5 sm:gap-3">
+          <span class="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] bg-[var(--muted)] text-[var(--accent)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 9h16"/>
+              <path d="M4 9a8 8 0 0 0 16 0"/>
+              <path d="M9 5c0-1 1-1.5 1-2.5M14 5c0-1 1-1.5 1-2.5"/>
+            </svg>
+          </span>
+          <span class="min-w-0 whitespace-nowrap text-[15px] sm:text-base lg:text-[17px] font-semibold leading-snug text-[var(--foreground)]" style="font-family:var(--font-heading)">Noodles &amp; Dumplings</span>
+        </span>
+        <span class="mt-3 block text-sm text-[var(--muted-foreground)]">17 stalls, Zone 2</span>
+      </button>
+
+      <button type="button" class="group text-left bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-4 sm:p-5 transition-colors hover:border-[var(--accent)] focus:outline-none focus-visible:border-[var(--accent)]">
+        <span class="flex items-center gap-2.5 sm:gap-3">
+          <span class="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] bg-[var(--muted)] text-[var(--accent)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v18"/>
+              <path d="M7 8a5 5 0 0 1 10 0v3H7Z"/>
+              <path d="M6 21h12"/>
+            </svg>
+          </span>
+          <span class="min-w-0 whitespace-nowrap text-[15px] sm:text-base lg:text-[17px] font-semibold leading-snug text-[var(--foreground)]" style="font-family:var(--font-heading)">Sweets &amp; Shaved Ice</span>
+        </span>
+        <span class="mt-3 block text-sm text-[var(--muted-foreground)]">19 stalls, Zone 3</span>
+      </button>
+
+      <!-- say: Remaining three cards follow the identical pattern. -->
+      <button type="button" class="group text-left bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-4 sm:p-5 transition-colors hover:border-[var(--accent)] focus:outline-none focus-visible:border-[var(--accent)]">
+        <span class="flex items-center gap-2.5 sm:gap-3">
+          <span class="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] bg-[var(--muted)] text-[var(--accent)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 3h10l-1.5 7.5a3.5 3.5 0 0 1-7 0Z"/>
+              <path d="M12 14v7"/>
+              <path d="M8 21h8"/>
+            </svg>
+          </span>
+          <span class="min-w-0 whitespace-nowrap text-[15px] sm:text-base lg:text-[17px] font-semibold leading-snug text-[var(--foreground)]" style="font-family:var(--font-heading)">Drinks &amp; Cocktails</span>
+        </span>
+        <span class="mt-3 block text-sm text-[var(--muted-foreground)]">14 stalls, across Zones 3 and 4</span>
+      </button>
+
+      <button type="button" class="group text-left bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-4 sm:p-5 transition-colors hover:border-[var(--accent)] focus:outline-none focus-visible:border-[var(--accent)]">
+        <span class="flex items-center gap-2.5 sm:gap-3">
+          <span class="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] bg-[var(--muted)] text-[var(--accent)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 20c0-7 4-13 14-16-1 10-5 14-12 14Z"/>
+              <path d="M5 20c3-4 6-6 9-8"/>
+            </svg>
+          </span>
+          <span class="min-w-0 whitespace-nowrap text-[15px] sm:text-base lg:text-[17px] font-semibold leading-snug text-[var(--foreground)]" style="font-family:var(--font-heading)">Vegetarian Friendly</span>
+        </span>
+        <span class="mt-3 block text-sm text-[var(--muted-foreground)]">12 stalls</span>
+      </button>
+
+      <button type="button" class="group text-left bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-4 sm:p-5 transition-colors hover:border-[var(--accent)] focus:outline-none focus-visible:border-[var(--accent)]">
+        <span class="flex items-center gap-2.5 sm:gap-3">
+          <span class="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius)] bg-[var(--muted)] text-[var(--accent)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="8"/>
+              <path d="M12 8v8"/>
+              <path d="M9.5 10.5c0-1 .9-1.5 2.5-1.5s2.5.6 2.5 1.5-1 1.4-2.5 1.7-2.5.8-2.5 1.8 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/>
+            </svg>
+          </span>
+          <span class="min-w-0 whitespace-nowrap text-[15px] sm:text-base lg:text-[17px] font-semibold leading-snug text-[var(--foreground)]" style="font-family:var(--font-heading)">Under NT$100</span>
+        </span>
+        <span class="mt-3 block text-sm text-[var(--muted-foreground)]">31 stalls</span>
+      </button>
+    </div>
+
+    <!-- say: Directory link stays unchanged below the grid. -->
+    <div class="mt-10">
+      <a href="#" data-goto="stalls" class="inline-flex items-center gap-2 rounded-[var(--radius)] bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-[var(--primary-foreground)] transition-opacity hover:opacity-90" style="font-family:var(--font-heading)">
+        Browse all stalls
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/>
+          <path d="M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- stall spotlight cards -->
+<section class="bg-[var(--background)] py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- say: spotlight cards that point to three must-try stalls -->
+    <div class="max-w-2xl">
+      <p class="text-[var(--accent)] text-sm tracking-[0.2em] uppercase">Stall spotlight</p>
+      <h2 class="mt-3 text-3xl md:text-4xl font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Start with these three.</h2>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <!-- Card 1 -->
+      <article class="flex flex-col rounded-[var(--radius)] bg-[var(--card)] border border-[var(--border)] p-7">
+        <div class="flex items-center justify-between">
+          <span class="text-xs tracking-[0.18em] uppercase text-[var(--muted-foreground)]">Zone 1</span>
+          <span class="rounded-[var(--radius)] bg-[var(--primary)] px-3 py-1 text-sm font-semibold text-[var(--primary-foreground)]" style="font-family:var(--font-heading)">07</span>
+        </div>
+        <h3 class="mt-5 text-xl font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Auntie Lin's Pepper Buns</h3>
+        <p class="mt-3 text-[var(--muted-foreground)] leading-relaxed">Wood-fired pepper pork buns</p>
+        <p class="mt-4 text-2xl font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">NT$65</p>
+        <p class="mt-3 text-sm text-[var(--muted-foreground)]">Queue moves fast before 19:00.</p>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="flex flex-col rounded-[var(--radius)] bg-[var(--card)] border border-[var(--border)] p-7">
+        <div class="flex items-center justify-between">
+          <span class="text-xs tracking-[0.18em] uppercase text-[var(--muted-foreground)]">Zone 2</span>
+          <span class="rounded-[var(--radius)] bg-[var(--primary)] px-3 py-1 text-sm font-semibold text-[var(--primary-foreground)]" style="font-family:var(--font-heading)">41</span>
+        </div>
+        <h3 class="mt-5 text-xl font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Jade Court Dumplings</h3>
+        <p class="mt-3 text-[var(--muted-foreground)] leading-relaxed">Pork and chive dumplings in chilli oil</p>
+        <p class="mt-4 text-2xl font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">NT$90</p>
+        <p class="mt-3 text-sm text-[var(--muted-foreground)]">Courtyard seating right beside it.</p>
+      </article>
+
+      <!-- say: third card carries the late-opening shaved ice stall -->
+      <!-- Card 3 -->
+      <article class="flex flex-col rounded-[var(--radius)] bg-[var(--card)] border border-[var(--border)] p-7">
+        <div class="flex items-center justify-between">
+          <span class="text-xs tracking-[0.18em] uppercase text-[var(--muted-foreground)]">Zone 3</span>
+          <span class="rounded-[var(--radius)] bg-[var(--primary)] px-3 py-1 text-sm font-semibold text-[var(--primary-foreground)]" style="font-family:var(--font-heading)">63</span>
+        </div>
+        <h3 class="mt-5 text-xl font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Neon Ice House</h3>
+        <p class="mt-3 text-[var(--muted-foreground)] leading-relaxed">Mango shaved ice with condensed milk</p>
+        <p class="mt-4 text-2xl font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">NT$80</p>
+        <p class="mt-3 text-sm text-[var(--muted-foreground)]">Opens at 18:00 and sells out by 23:00.</p>
+      </article>
+    </div>
+
+    <!-- say: single link out to the full stall listings -->
+    <div class="mt-12">
+      <a href="#" data-goto="stalls" class="inline-flex items-center gap-2 rounded-[var(--radius)] border border-[var(--border)] px-6 py-3 text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors" style="font-family:var(--font-heading)">
+        Browse all stalls
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- accessibility notes -->
+<section data-layer="vendor-map-accessibility-notes" class="bg-[var(--background)] pt-20 pb-24 md:pt-28 md:pb-32">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- say: Widening top/bottom padding so the heading never clips. -->
+    <div class="grid gap-12 md:grid-cols-[minmax(0,1fr)_320px] md:gap-16 md:items-start">
+      <!-- say: Heading and intro block, given room to breathe below. -->
+      <div class="min-w-0 pb-2">
+        <p class="text-[var(--accent)] font-body text-sm tracking-[0.2em] uppercase mb-3">Access notes</p>
+        <h2 class="text-3xl md:text-4xl font-semibold text-[var(--foreground)] leading-tight pb-1" style="font-family:var(--font-heading)">Getting around the alley</h2>
+        <p class="mt-4 text-[var(--muted-foreground)] font-body max-w-2xl leading-relaxed">Step-free entry at Gate A and Gate B, with a ramped route along the full length of Lantern Row and Jade Court. Gate C has a 12cm curb — use the Gate B route instead. Accessible toilets are marked with a jade circle: one beside Jade Court, one at the Riverside Grill seating deck. Wide-lane stalls (1.8m clearance) are highlighted on the map for wheelchair and stroller access. Quiet seating areas sit behind Jade Court and at the riverside deck.</p>
+      </div>
+
+      <!-- say: Legend card for the jade circle and wide lane markers. -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-6">
+        <h3 class="text-[var(--foreground)] font-semibold mb-4" style="font-family:var(--font-heading)">Map markers</h3>
+        <ul class="space-y-4 font-body text-sm">
+          <li class="flex items-start gap-3">
+            <span class="mt-0.5 inline-block w-4 h-4 shrink-0 rounded-full border-2 border-[#00d4a0] bg-[#00d4a0]/20" aria-hidden="true"></span>
+            <span class="text-[var(--muted-foreground)]">Jade circle = accessible toilet</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-0.5 inline-block w-4 h-4 shrink-0 rounded-[3px] border-2 border-[var(--primary)] bg-[var(--primary)]/20" aria-hidden="true"></span>
+            <span class="text-[var(--muted-foreground)]">Highlighted stall = wide lane (1.8m clearance)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- say: Tickets CTA, spaced clear of the section's bottom edge. -->
+    <div class="mt-12 md:mt-16">
+      <a href="#" data-goto="tickets" class="inline-flex items-center justify-center px-6 py-3 rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)] font-medium font-body transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)]">
+        Get your tickets
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- plan-your-route cta -->
+<section class="bg-[var(--background)] py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-8 md:p-12">
+      <div class="grid md:grid-cols-[1fr_auto] gap-10 items-center">
+        <!-- say: Lead copy states the route-building promise verbatim. -->
+        <div>
+          <h2 class="text-2xl md:text-3xl font-semibold text-[var(--foreground)] max-w-xl" style="font-family:var(--font-heading)">
+            Build your route before you go.
+          </h2>
+          <p class="mt-5 text-[var(--muted-foreground)] max-w-2xl leading-relaxed">
+            Save stalls to a shortlist and get a walking order from Gate A to Gate C — most visitors hit eight to ten stalls in three hours.
+          </p>
+          <p class="mt-4 text-[var(--muted-foreground)] max-w-2xl leading-relaxed">
+            Print the map or keep it on your phone; the alley Wi-Fi is free.
+          </p>
+        </div>
+
+        <!-- say: Two actions — grab tickets or head back home. -->
+        <div class="flex flex-col sm:flex-row md:flex-col gap-3 md:w-56">
+          <a
+            href="#tickets"
+            data-goto="tickets"
+            class="inline-flex items-center justify-center text-center px-6 py-3 rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)] font-medium hover:opacity-90 transition-opacity"
+            style="font-family:var(--font-heading)"
+          >
+            Get tickets
+          </a>
+          <a
+            href="#home"
+            data-goto="home"
+            class="inline-flex items-center justify-center text-center px-6 py-3 rounded-[var(--radius)] border border-[var(--border)] text-[var(--foreground)] font-medium hover:border-[var(--accent)] transition-colors"
+            style="font-family:var(--font-heading)"
+          >
+            Back to home
+          </a>
+        </div>
+      </div>
+
+      <!-- say: Thin neon accent line closes the panel. -->
+      <div class="mt-10 pt-8 border-t border-[var(--border)] flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[var(--accent)]" style="font-family:var(--font-heading)">
+        <span>Gate A</span>
+        <span class="text-[var(--muted-foreground)]">→</span>
+        <span>Gate C</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer class="bg-[var(--background)] border-t border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+      <!-- say: Brand block leads the footer with festival details -->
+      <div>
+        <p class="text-xs tracking-[0.18em] uppercase text-[var(--accent)] mb-4" style="font-family:var(--font-heading)">Neon Alley Nights</p>
+        <h2 class="text-[var(--foreground)] text-2xl md:text-3xl font-semibold leading-tight max-w-sm" style="font-family:var(--font-heading)">
+          Taipei Street Food Festival, March 20–22, Huashan Creative Park, 6pm–1am nightly.
+        </h2>
+      </div>
+
+      <!-- say: Navigation list links to the three main site pages -->
+      <nav aria-label="Footer" class="md:justify-self-end">
+        <ul class="grid grid-cols-2 gap-x-10 gap-y-3 text-sm">
+          <li>
+            <a href="#" data-goto="tickets" class="text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Tickets</a>
+          </li>
+          <li>
+            <a href="#" data-goto="vendor-map" class="text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Vendor Map</a>
+          </li>
+          <li>
+            <a href="#" data-goto="stalls" class="text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Stalls</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- say: Thin divider keeps the closing line quiet -->
+    <div class="mt-14 pt-6 border-t border-[var(--border)] flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-sm text-[var(--muted-foreground)]">© 2025 Neon Alley Nights.</p>
+      <p class="text-sm text-[var(--muted-foreground)]">Eat loud, stay late.</p>
+    </div>
+  </div>
+</footer>
+<script>
+// layout: a text panel floated over a map or picture moves beside it when it would cover other text
+(() => {
+  const guard = function swarmLayout(root, report) {
+  const doc = root.ownerDocument || root
+  const view = doc.defaultView
+  // a real sentence or name, not a pin number or a one-word label
+  const prose = el => [...el.querySelectorAll('*'), el].some(x => [...x.childNodes].some(n => n.nodeType === 3 && n.textContent.trim().length >= 12))
+  const area = r => Math.max(0, r.width) * Math.max(0, r.height)
+  const meet = (a, b) => Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) * Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top))
+  // on screen: not hidden, not faded out, not inside a closed <details> menu
+  const shown = el => el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : !el.closest('details:not([open])') && view.getComputedStyle(el).display !== 'none'
+
+  // every visible run of text in a section, with its box
+  function texts(section) {
+    const out = [], walk = doc.createTreeWalker(section, 4)
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (!n.textContent.trim() || !n.parentElement || !shown(n.parentElement)) continue
+      const r = doc.createRange()
+      r.selectNodeContents(n)
+      const b = r.getBoundingClientRect()
+      if (area(b) > 0) out.push({ node: n, box: b })
+    }
+    return out
+  }
+
+  const clip = t => t.replace(/\s+/g, ' ').trim().slice(0, 48)
+  const found = []
+  for (const section of [...root.children]) {
+    // menus and dropdowns in the nav are meant to sit over the page
+    if (/^(SCRIPT|STYLE|LINK|TEMPLATE|NAV|HEADER)$/.test(section.tagName) || section.dataset.layer === 'nav') continue
+    // text panels the design positions absolutely, outermost first
+    const floats = [...section.querySelectorAll('*')].filter(el => !el.dataset.swarmFlow && view.getComputedStyle(el).position === 'absolute' && shown(el) && prose(el))
+    const outer = floats.filter(el => !floats.some(o => o !== el && o.contains(el)))
+    if (!outer.length) continue
+    const runs = texts(section)
+    const after = new Map()
+    for (const el of outer) {
+      const box = el.getBoundingClientRect()
+      // a badge poking out of its card is fine; a panel on top of other text is not
+      const hit = runs.find(t => !el.contains(t.node) && meet(box, t.box) > 0.25 * area(t.box))
+      if (!hit) continue
+      found.push({ layer: section.dataset.layer || null, index: [...root.children].indexOf(section), panel: clip(el.textContent), covers: clip(hit.node.textContent) })
+      if (report) continue
+      const host = el.offsetParent, hb = host?.getBoundingClientRect()
+      el.dataset.swarmFlow = '1'
+      Object.assign(el.style, { position: 'relative', inset: 'auto', transform: 'none', width: 'auto', maxWidth: '100%', zIndex: 'auto' })
+      // inside the section, the panel leaves the box and sits just above or below it
+      if (!host || host === section || !section.contains(host) || host.contains(section)) continue
+      if (box.top + box.height / 2 < hb.top + hb.height / 2 && !after.has(host)) {
+        host.before(el)
+        el.style.margin = '0 0 16px'
+      } else {
+        ;(after.get(host) || host).after(el)
+        after.set(host, el)
+        el.style.margin = '16px 0 0'
+      }
+    }
+  }
+  return found
+}
+  const run = () => guard(document.body)
+  run()
+  document.fonts && document.fonts.ready.then(run)
+  let t
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 150) })
+})()
+
+// motion: sections reveal as they scroll in
+addEventListener('load', () => (function swarmMotion(root, preset) {
+  const p = { gentle: { rise: 18, scale: 1, ms: 750, step: 70, ease: 'cubic-bezier(.2,.7,.2,1)' }, snappy: { rise: 36, scale: 0.96, ms: 520, step: 55, ease: 'cubic-bezier(.34,1.56,.64,1)' } }[preset] || { rise: 18, scale: 1, ms: 750, step: 70, ease: 'ease' }
+  const doc = root.ownerDocument || root
+  const html = doc.documentElement
+  html.style.setProperty('--m-rise', `${p.rise}px`)
+  html.style.setProperty('--m-scale', String(p.scale))
+  html.style.setProperty('--m-ms', `${p.ms}ms`)
+  html.style.setProperty('--m-ease', p.ease)
+  const view = doc.defaultView
+  if (view.matchMedia && view.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const PICK = 'h1,h2,h3,h4,p,img,button,[data-goto],li,article,figure,blockquote,form,table,svg'
+  // the page's top-level blocks are its sections
+  const sections = [...root.children].filter(el => !/^(SCRIPT|STYLE|LINK|TEMPLATE)$/.test(el.tagName))
+  // once revealed, an element drops the reveal so its hover moves without a delay
+  const settle = el => {
+    const done = e => {
+      if (e.target !== el) return
+      el.removeEventListener('transitionend', done)
+      el.classList.remove('m-t', 'm-in')
+      el.style.removeProperty('--m-delay')
+    }
+    el.addEventListener('transitionend', done)
+  }
+  const show = s => s.querySelectorAll('.m-t:not(.m-in)').forEach(el => { settle(el); el.classList.add('m-in') })
+  const io = new view.IntersectionObserver(entries => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue
+      io.unobserve(e.target)
+      show(e.target)
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' })
+  sections.forEach((s, si) => {
+    if (s.dataset.mDone) return
+    s.dataset.mDone = '1'
+    // the nav is there from the start
+    if (/^(nav|header)$/i.test(s.tagName) || s.dataset.layer === 'nav' || (si === 0 && s.querySelector('nav'))) return
+    let n = 0
+    for (const el of s.querySelectorAll(PICK)) {
+      if (n >= 14) break
+      if (el.closest('.m-t') || (el.tagName.toLowerCase() !== 'svg' && el.closest('svg'))) continue
+      // tiny things, and things the design already moves or positions with a transform, stay put
+      if (el.getBoundingClientRect().height < 4 || view.getComputedStyle(el).transform !== 'none') continue
+      el.classList.add('m-t')
+      el.style.setProperty('--m-delay', `${Math.min(n, 10) * p.step}ms`)
+      n++
+    }
+    // the first screen plays as the page opens; the rest as it scrolls in
+    if (s.getBoundingClientRect().top < view.innerHeight * 0.9) view.requestAnimationFrame(() => view.requestAnimationFrame(() => show(s)))
+    else io.observe(s)
+  })
+})(document.body, "snappy"))
+
+// buttons and links made on the canvas name the page they go to
+const pages = {"home":"index.html","tickets":"tickets.html","vendor-map":"vendor-map.html","stalls":"stalls.html"}
+document.addEventListener('click', e => {
+  const go = e.target.closest('[data-goto]')
+  if (go && pages[go.dataset.goto]) { e.preventDefault(); location.href = pages[go.dataset.goto] }
+})
+document.addEventListener('submit', e => e.preventDefault())
+</script>
+</body>
+</html>

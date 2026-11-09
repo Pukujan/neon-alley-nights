@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tickets</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --background: #0f0b1a;
+  --foreground: #f6f1ea;
+  --primary: #ff2e88;
+  --primary-foreground: #0f0b1a;
+  --muted: #1c1530;
+  --muted-foreground: #b5a9c9;
+  --border: #332a4a;
+  --accent: #28e0b0;
+  --card: #171024;
+  --font-heading: 'Chakra Petch', Georgia, serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --radius: 10px;
+}
+html, body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-body); }
+
+[data-goto],button,a[href]{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+[data-goto]:hover,button:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.m-t{opacity:0;transform:translateY(var(--m-rise)) scale(var(--m-scale));transition:opacity var(--m-ms) var(--m-ease),transform var(--m-ms) var(--m-ease);transition-delay:var(--m-delay,0ms)}
+img.m-t{transform:scale(1.06)}
+.m-t.m-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.m-t{opacity:1;transform:none;transition:none}[data-goto]:hover,button:hover{transform:none}}
+</style>
+</head>
+<body>
+<!-- navigation -->
+<nav class="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur border-b border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-center justify-between h-16 md:h-20 gap-4">
+
+      <!-- Brand -->
+      <a href="#" data-goto="home" class="flex items-center gap-3 shrink-0 group">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)]">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" aria-hidden="true">
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>
+            <circle cx="12" cy="12" r="3.2"/>
+          </svg>
+        </span>
+        <span class="text-[var(--foreground)] text-base md:text-lg font-semibold tracking-tight" style="font-family:var(--font-heading)">Neon Alley Nights</span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="hidden md:flex items-center gap-8">
+        <li>
+          <a href="#" data-goto="home" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Home</a>
+        </li>
+        <li>
+          <a href="#" data-goto="tickets" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Tickets</a>
+        </li>
+        <li>
+          <a href="#" data-goto="vendor-map" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Vendor Map</a>
+        </li>
+        <li>
+          <a href="#" data-goto="stalls" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Stalls</a>
+        </li>
+      </ul>
+
+      <!-- CTA -->
+      <a href="#" data-goto="tickets" class="inline-flex items-center justify-center rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)] px-4 md:px-6 h-10 text-sm font-semibold tracking-wide hover:opacity-90 transition-opacity" style="font-family:var(--font-heading)">Get Tickets</a>
+
+    </div>
+
+    <!-- Mobile links -->
+    <div class="md:hidden pb-4 -mt-1">
+      <ul class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <li><a href="#" data-goto="home" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Home</a></li>
+        <li><a href="#" data-goto="tickets" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Tickets</a></li>
+        <li><a href="#" data-goto="vendor-map" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Vendor Map</a></li>
+        <li><a href="#" data-goto="stalls" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Stalls</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- hero -->
+<!-- say: Starting the tickets page hero with eyebrow, headline and intro. -->
+<section class="relative overflow-hidden bg-[var(--background)] text-[var(--foreground)]">
+  <div class="absolute inset-0 pointer-events-none opacity-70" aria-hidden="true">
+    <div class="absolute -top-32 -left-24 h-72 w-72 rounded-full bg-[var(--primary)] blur-[120px] opacity-30"></div>
+    <div class="absolute top-24 right-0 h-64 w-64 rounded-full bg-[var(--accent)] blur-[130px] opacity-20"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-16 sm:pt-28 sm:pb-24">
+    <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:items-center">
+      <div>
+        <!-- say: Eyebrow label sets page context quickly. -->
+        <p class="text-xs sm:text-sm uppercase tracking-[0.28em] text-[var(--accent)] font-semibold">Neon Alley Nights</p>
+
+        <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl leading-[1.05] font-bold tracking-tight text-[var(--foreground)]" style="font-family:var(--font-heading)">
+          Tickets
+        </h1>
+
+        <p class="mt-6 max-w-xl text-lg sm:text-xl leading-relaxed text-[var(--muted-foreground)]">
+          Three nights of neon, smoke and sizzle. Neon Alley Nights runs Friday 6–Sunday 8 March, 6pm till 1am, in the alleys behind Huaxi Street. Pick your pass below — Friday and Saturday sell out first, so book early.
+        </p>
+
+        <!-- say: Two quick links out to map and stalls. -->
+        <div class="mt-9 flex flex-wrap items-center gap-3">
+          <a href="#" data-goto="vendor-map" class="inline-flex items-center gap-2 rounded-[var(--radius)] bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-[var(--primary-foreground)] transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">
+            Check the vendor map
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
+              <path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#" data-goto="stalls" class="inline-flex items-center gap-2 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:border-[var(--accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]">
+            Browse the stalls
+          </a>
+        </div>
+      </div>
+
+      <!-- say: Neon sign panel as a visual anchor for the hero. -->
+      <div class="relative rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-7 sm:p-9">
+        <div class="absolute inset-x-7 top-0 h-px bg-[var(--accent)] opacity-60" aria-hidden="true"></div>
+        <p class="text-xs uppercase tracking-[0.24em] text-[var(--muted-foreground)] font-semibold">Opening hours</p>
+        <p class="mt-4 text-2xl sm:text-3xl font-bold leading-tight" style="font-family:var(--font-heading)">
+          6pm till 1am
+        </p>
+        <dl class="mt-7 space-y-4 text-sm">
+          <div class="flex items-baseline justify-between gap-4 border-b border-[var(--border)] pb-3">
+            <dt class="text-[var(--muted-foreground)]">Dates</dt>
+            <dd class="font-semibold text-right">Friday 6–Sunday 8 March</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4">
+            <dt class="text-[var(--muted-foreground)]">Where</dt>
+            <dd class="font-semibold text-right">The alleys behind Huaxi Street</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- pass tiers -->
+<!-- Rebuilding the tiers with fixed Neon VIP contrast. -->
+<section class="bg-[var(--background)] py-20 sm:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl">
+      <h2 style="font-family:var(--font-heading)" class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--foreground)]">Pick your pass</h2>
+      <!-- Keeping the short accent rule under the heading. -->
+      <div class="mt-5 h-px w-24 bg-[var(--accent)]"></div>
+    </div>
+
+    <!-- Three equal cards; each is a flex column so the CTA sits at the base. -->
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+
+      <!-- Single Night Pass -->
+      <article class="flex flex-col h-full rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-7">
+        <h3 style="font-family:var(--font-heading)" class="text-lg font-semibold text-[var(--foreground)]">Single Night Pass</h3>
+        <p style="font-family:var(--font-heading)" class="mt-4 text-4xl font-bold text-[var(--foreground)]">NT$450</p>
+        <ul class="mt-6 space-y-3 text-sm leading-relaxed text-[var(--muted-foreground)] border-t border-[var(--border)] pt-6">
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span><span>one night of your choice</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span><span>all 42 stalls</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span><span>one drink token</span></li>
+        </ul>
+        <!-- mt-auto pins all three CTAs to the same baseline. -->
+        <a href="#" data-goto="tickets" class="mt-auto inline-flex w-full items-center justify-center rounded-[var(--radius)] border-2 border-[var(--accent)] bg-[var(--background)] px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-[var(--accent)] hover:text-[var(--background)]">Choose Single Night</a>
+      </article>
+
+      <!-- Weekend Pass -->
+      <article class="flex flex-col h-full rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-7">
+        <h3 style="font-family:var(--font-heading)" class="text-lg font-semibold text-[var(--foreground)]">Weekend Pass</h3>
+        <p style="font-family:var(--font-heading)" class="mt-4 text-4xl font-bold text-[var(--foreground)]">NT$1,100</p>
+        <ul class="mt-6 space-y-3 text-sm leading-relaxed text-[var(--muted-foreground)] border-t border-[var(--border)] pt-6">
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span><span>all three nights</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span><span>42 stalls</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span><span>three drink tokens</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"></span><span>priority re-entry</span></li>
+        </ul>
+        <a href="#" data-goto="tickets" class="mt-auto inline-flex w-full items-center justify-center rounded-[var(--radius)] border-2 border-[var(--accent)] bg-[var(--background)] px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-[var(--accent)] hover:text-[var(--background)]">Choose Weekend</a>
+      </article>
+
+      <!-- Neon VIP: white copy on the magenta surface for strong contrast. -->
+      <article class="flex flex-col h-full rounded-[var(--radius)] border border-[var(--accent)] bg-[var(--primary)] p-7">
+        <h3 style="font-family:var(--font-heading)" class="text-lg font-semibold text-white">Neon VIP</h3>
+        <p style="font-family:var(--font-heading)" class="mt-4 text-4xl font-bold text-white">NT$1,900</p>
+        <!-- White heading, body and dots replace the low-contrast cyan. -->
+        <ul class="mt-6 space-y-3 text-sm leading-relaxed text-white border-t border-white/30 pt-6">
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white"></span><span>all three nights</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white"></span><span>fast-lane entry</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white"></span><span>three drink tokens</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white"></span><span>a reserved table in the Lantern Court</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white"></span><span>a limited-edition glow enamel pin</span></li>
+        </ul>
+        <a href="#" data-goto="tickets" class="mt-auto inline-flex w-full items-center justify-center rounded-[var(--radius)] bg-[var(--background)] px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:opacity-90">Choose Neon VIP</a>
+      </article>
+    </div>
+
+    <!-- Group saving stays quiet below the cards. -->
+    <p class="mt-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--muted)] px-6 py-4 text-sm leading-relaxed text-[var(--muted-foreground)]">Groups of six or more save 15% on any pass.</p>
+  </div>
+</section>
+
+<!-- what's included -->
+<section class="bg-[var(--background)] text-[var(--foreground)] py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid gap-12 md:grid-cols-[minmax(0,1fr)_320px] md:items-start">
+      <div>
+        <p class="text-xs uppercase tracking-[0.2em] text-[var(--accent)] font-semibold">What's included</p>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-bold leading-tight" style="font-family:var(--font-heading)">Every pass includes</h2>
+
+        <!-- say: Starting the included list with the open alleys entry. -->
+        <ul class="mt-8 space-y-4 text-[var(--muted-foreground)]">
+          <li class="flex gap-4 rounded-[var(--radius)] bg-[var(--card)] border border-[var(--border)] p-5">
+            <span class="mt-1 text-[var(--accent)] shrink-0" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9.5l4 4L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>Entry to all open alleys and the Lantern Court</span>
+          </li>
+          <li class="flex gap-4 rounded-[var(--radius)] bg-[var(--card)] border border-[var(--border)] p-5">
+            <span class="mt-1 text-[var(--accent)] shrink-0" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9.5l4 4L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>Access to all 42 food stalls</span>
+          </li>
+          <li class="flex gap-4 rounded-[var(--radius)] bg-[var(--card)] border border-[var(--border)] p-5">
+            <span class="mt-1 text-[var(--accent)] shrink-0" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9.5l4 4L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>Live sets on the Jade Stage each night at 8pm and 10:30pm</span>
+          </li>
+        </ul>
+
+        <!-- say: Adding map and water refill points next. -->
+        <ul class="mt-4 space-y-4 text-[var(--muted-foreground)]">
+          <li class="flex gap-4 rounded-[var(--radius)] bg-[var(--card)] border border-[var(--border)] p-5">
+            <span class="mt-1 text-[var(--accent)] shrink-0" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9.5l4 4L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>A printed vendor map</span>
+          </li>
+          <li class="flex gap-4 rounded-[var(--radius)] bg-[var(--card)] border border-[var(--border)] p-5">
+            <span class="mt-1 text-[var(--accent)] shrink-0" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9.5l4 4L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>Free filtered water refill stations</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- say: Side panel for the upgrade extras and stalls link. -->
+      <aside class="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--muted)] p-6 md:sticky md:top-6">
+        <h3 class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Weekend Pass and Neon VIP add</h3>
+        <ul class="mt-5 space-y-3 text-sm text-[var(--muted-foreground)]">
+          <li class="flex gap-3">
+            <span class="mt-1 text-[var(--accent)] shrink-0" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M3 9.5l4 4L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>Drink tokens redeemable at any bar stall</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 text-[var(--accent)] shrink-0" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M3 9.5l4 4L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>Priority re-entry if you step out for air</span>
+          </li>
+        </ul>
+        <a href="#" data-goto="stalls" class="mt-6 inline-flex items-center justify-center gap-2 w-full rounded-[var(--radius)] bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-[var(--primary-foreground)] hover:opacity-90 transition-opacity">
+          Browse the stalls
+          <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- late-night add-ons -->
+<section class="bg-[var(--background)] pt-20 md:pt-28 pb-24 md:pb-32">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- say: Setting up the late-night add-ons section header -->
+    <div class="max-w-2xl">
+      <p class="text-xs uppercase tracking-[0.2em] text-[var(--accent)] font-medium">Add-ons</p>
+      <h2 class="mt-4 text-3xl md:text-4xl font-bold text-[var(--foreground)]" style="font-family:var(--font-heading)">Stay past midnight.</h2>
+      <p class="mt-4 text-base leading-relaxed text-[var(--muted-foreground)]">Add any of these to your pass at checkout.</p>
+    </div>
+
+    <!-- say: Laying out the three add-on cards, stacked on phones -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7 flex flex-col">
+        <h3 class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Midnight Ramen Crawl</h3>
+        <p class="mt-2 text-2xl font-bold text-[var(--accent)]" style="font-family:var(--font-heading)">NT$680</p>
+        <p class="mt-4 text-sm leading-relaxed text-[var(--muted-foreground)] flex-1">A guided 90-minute walk through four noodle stalls with the vendors themselves, 12:00am–1:30am, Friday and Saturday.</p>
+      </article>
+
+      <!-- say: Second card is the Neon Nightcap with its cocktail details -->
+      <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7 flex flex-col">
+        <h3 class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Neon Nightcap</h3>
+        <p class="mt-2 text-2xl font-bold text-[var(--accent)]" style="font-family:var(--font-heading)">NT$520</p>
+        <p class="mt-4 text-sm leading-relaxed text-[var(--muted-foreground)] flex-1">Three cocktails at the Alley Bar and a seat on the rooftop until 2am.</p>
+      </article>
+
+      <!-- say: Glow Kit card gets room to breathe so price stays visible -->
+      <article class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-7 mb-2 flex flex-col">
+        <h3 class="text-lg font-semibold text-[var(--foreground)]" style="font-family:var(--font-heading)">Glow Kit</h3>
+        <p class="mt-2 text-2xl font-bold text-[var(--accent)]" style="font-family:var(--font-heading)">NT$250</p>
+        <p class="mt-4 text-sm leading-relaxed text-[var(--muted-foreground)] flex-1">Your own lantern, LED wristband and enamel pin.</p>
+      </article>
+    </div>
+
+    <!-- say: Adding quiet links to stalls and the vendor map -->
+    <div class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
+      <a href="#" data-goto="stalls" class="inline-flex items-center gap-2 text-sm font-medium text-[var(--foreground)] underline decoration-[var(--accent)] decoration-2 underline-offset-4 hover:text-[var(--accent)] transition-colors">Browse the stalls</a>
+      <a href="#" data-goto="vendor-map" class="inline-flex items-center gap-2 text-sm font-medium text-[var(--foreground)] underline decoration-[var(--accent)] decoration-2 underline-offset-4 hover:text-[var(--accent)] transition-colors">Find them on the vendor map</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- entry rules accordion -->
+<section id="tickets-entry-rules" class="bg-[var(--background)] py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl">
+      <p class="text-[var(--accent)] uppercase tracking-[0.2em] text-xs mb-3" style="font-family:var(--font-heading)">Before you go</p>
+      <h2 class="text-3xl md:text-4xl text-[var(--foreground)]" style="font-family:var(--font-heading)">Entry rules</h2>
+    </div>
+
+    <!-- say: Building the rules accordion, native details elements for simplicity. -->
+    <div class="mt-10 divide-y divide-[var(--border)] border-t border-b border-[var(--border)]">
+
+      <details class="group" open>
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-6 text-[var(--foreground)] transition-colors hover:text-[var(--accent)]">
+          <span class="text-lg md:text-xl" style="font-family:var(--font-heading)">Age</span>
+          <svg class="h-5 w-5 shrink-0 text-[var(--muted-foreground)] transition-transform duration-200 group-open:rotate-45" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <p class="pb-6 pr-10 text-[var(--muted-foreground)] leading-relaxed">Under 18s welcome until 10pm and must be with a guardian; the bars are 18+ with ID checked at the gate.</p>
+      </details>
+
+      <details class="group">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-6 text-[var(--foreground)] transition-colors hover:text-[var(--accent)]">
+          <span class="text-lg md:text-xl" style="font-family:var(--font-heading)">ID</span>
+          <svg class="h-5 w-5 shrink-0 text-[var(--muted-foreground)] transition-transform duration-200 group-open:rotate-45" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <p class="pb-6 pr-10 text-[var(--muted-foreground)] leading-relaxed">Bring photo ID — accepted are Taiwan ID, passport or ARC.</p>
+      </details>
+
+      <!-- say: Adding entry and re-entry rules next. -->
+      <details class="group">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-6 text-[var(--foreground)] transition-colors hover:text-[var(--accent)]">
+          <span class="text-lg md:text-xl" style="font-family:var(--font-heading)">Re-entry</span>
+          <svg class="h-5 w-5 shrink-0 text-[var(--muted-foreground)] transition-transform duration-200 group-open:rotate-45" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <p class="pb-6 pr-10 text-[var(--muted-foreground)] leading-relaxed">allowed until 11pm with your wristband intact; after 11pm, entry is one-time.</p>
+      </details>
+
+      <details class="group">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-6 text-[var(--foreground)] transition-colors hover:text-[var(--accent)]">
+          <span class="text-lg md:text-xl" style="font-family:var(--font-heading)">Bags</span>
+          <svg class="h-5 w-5 shrink-0 text-[var(--muted-foreground)] transition-transform duration-200 group-open:rotate-45" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <p class="pb-6 pr-10 text-[var(--muted-foreground)] leading-relaxed">large bags are checked free at the Huaxi Street gate.</p>
+      </details>
+
+      <!-- say: Closing out with cash, weather and accessibility entries. -->
+      <details class="group">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-6 text-[var(--foreground)] transition-colors hover:text-[var(--accent)]">
+          <span class="text-lg md:text-xl" style="font-family:var(--font-heading)">Cash</span>
+          <svg class="h-5 w-5 shrink-0 text-[var(--muted-foreground)] transition-transform duration-200 group-open:rotate-45" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <p class="pb-6 pr-10 text-[var(--muted-foreground)] leading-relaxed">many stalls are cash-only, though the bigger ones take cards and mobile pay.</p>
+      </details>
+
+      <details class="group">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-6 text-[var(--foreground)] transition-colors hover:text-[var(--accent)]">
+          <span class="text-lg md:text-xl" style="font-family:var(--font-heading)">Weather</span>
+          <svg class="h-5 w-5 shrink-0 text-[var(--muted-foreground)] transition-transform duration-200 group-open:rotate-45" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <p class="pb-6 pr-10 text-[var(--muted-foreground)] leading-relaxed">the market runs rain or shine and is covered through the main alley.</p>
+      </details>
+
+      <details class="group">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-6 text-[var(--foreground)] transition-colors hover:text-[var(--accent)]">
+          <span class="text-lg md:text-xl" style="font-family:var(--font-heading)">Accessibility</span>
+          <svg class="h-5 w-5 shrink-0 text-[var(--muted-foreground)] transition-transform duration-200 group-open:rotate-45" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <p class="pb-6 pr-10 text-[var(--muted-foreground)] leading-relaxed">step-free routes run through Alleys A and B; ask any steward for the lift key to the Lantern Court.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- faq -->
+<section class="bg-[var(--background)] py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl">
+      <p class="text-[var(--accent)] text-sm uppercase tracking-[0.2em] mb-4" style="font-family:var(--font-heading)">Before you buy</p>
+      <h2 class="text-3xl md:text-4xl font-semibold text-[var(--foreground)] leading-tight" style="font-family:var(--font-heading)">Questions</h2>
+    </div>
+
+    <!-- say: Balanced two-column list keeps every item the same width. -->
+    <dl class="mt-12 md:mt-16 grid gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden md:grid-cols-2">
+      <div class="bg-[var(--card)] p-6 md:p-8">
+        <dt class="text-[var(--foreground)] font-semibold text-lg" style="font-family:var(--font-heading)">Can I buy at the gate?</dt>
+        <dd class="mt-2 text-[var(--muted-foreground)] leading-relaxed">Yes, unless the night is sold out — weekends usually are by Thursday.</dd>
+      </div>
+
+      <div class="bg-[var(--card)] p-6 md:p-8">
+        <dt class="text-[var(--foreground)] font-semibold text-lg" style="font-family:var(--font-heading)">Can I change my night?</dt>
+        <dd class="mt-2 text-[var(--muted-foreground)] leading-relaxed">Single Night Passes can be moved once, free, up to 24 hours before.</dd>
+      </div>
+
+      <div class="bg-[var(--card)] p-6 md:p-8">
+        <dt class="text-[var(--foreground)] font-semibold text-lg" style="font-family:var(--font-heading)">Are passes refundable?</dt>
+        <dd class="mt-2 text-[var(--muted-foreground)] leading-relaxed">Fully refundable up to seven days before the festival; after that, transfer them to a friend.</dd>
+      </div>
+
+      <div class="bg-[var(--card)] p-6 md:p-8">
+        <dt class="text-[var(--foreground)] font-semibold text-lg" style="font-family:var(--font-heading)">Do drink tokens expire?</dt>
+        <dd class="mt-2 text-[var(--muted-foreground)] leading-relaxed">They are valid all three nights, one per token, at any bar stall.</dd>
+      </div>
+
+      <!-- say: Wristband answer now sits in the odd slot, same width. -->
+      <div class="bg-[var(--card)] p-6 md:p-8 flex flex-col">
+        <dt class="text-[var(--foreground)] font-semibold text-lg" style="font-family:var(--font-heading)">Where do I pick up my wristband?</dt>
+        <dd class="mt-2 text-[var(--muted-foreground)] leading-relaxed">At the Huaxi Street gate from 5:30pm — bring the QR code from your confirmation email.</dd>
+        <a href="#" data-goto="vendor-map" class="mt-4 inline-flex items-center gap-2 text-[var(--accent)] font-medium underline-offset-4 hover:underline" style="font-family:var(--font-heading)">Find the Huaxi Street gate on the vendor map &rarr;</a>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- checkout cta -->
+<section class="bg-[var(--background)] py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius)] p-8 md:p-14">
+      <div class="grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-16 items-center">
+
+        <!-- say: Urgency line stays the main heading here -->
+        <div>
+          <h2 class="text-3xl md:text-4xl text-[var(--foreground)] leading-tight" style="font-family:var(--font-heading)">
+            Ready when you are.
+          </h2>
+          <p class="mt-5 text-base md:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-xl">
+            Friday and Saturday nights sold out last year — lock in your pass now and walk straight to the gate with your QR code.
+          </p>
+
+          <!-- say: Single primary button, price now inside the label -->
+          <div class="mt-8">
+            <a href="#" data-goto="tickets" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-[var(--radius)] bg-[var(--primary)] text-[var(--primary-foreground)] font-medium tracking-wide hover:opacity-90 transition-opacity" style="font-family:var(--font-heading)">
+              Get Tickets — from NT$450
+            </a>
+          </div>
+        </div>
+
+        <!-- say: Route block kept, link made inline-flex so text holds one line -->
+        <div class="border-t md:border-t-0 md:border-l border-[var(--border)] pt-8 md:pt-0 md:pl-12">
+          <p class="text-base text-[var(--muted-foreground)] leading-relaxed">
+            Planning your route? Check the Vendor Map before you arrive and find the stalls on your must-eat list.
+          </p>
+          <a href="#" data-goto="vendor-map" class="mt-6 inline-flex items-center gap-2 whitespace-nowrap text-[var(--foreground)] border-b border-[var(--accent)] pb-1 hover:text-[var(--accent)] transition-colors" style="font-family:var(--font-heading)">
+            <span>Vendor Map</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <div class="mt-8">
+            <a href="#" data-goto="home" class="text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors">
+              Back to Neon Alley Nights
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer class="bg-[var(--background)] border-t border-[var(--border)]">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+      <!-- say: Brand block leads the footer with festival details -->
+      <div>
+        <p class="text-xs tracking-[0.18em] uppercase text-[var(--accent)] mb-4" style="font-family:var(--font-heading)">Neon Alley Nights</p>
+        <h2 class="text-[var(--foreground)] text-2xl md:text-3xl font-semibold leading-tight max-w-sm" style="font-family:var(--font-heading)">
+          Taipei Street Food Festival, March 20–22, Huashan Creative Park, 6pm–1am nightly.
+        </h2>
+      </div>
+
+      <!-- say: Navigation list links to the three main site pages -->
+      <nav aria-label="Footer" class="md:justify-self-end">
+        <ul class="grid grid-cols-2 gap-x-10 gap-y-3 text-sm">
+          <li>
+            <a href="#" data-goto="tickets" class="text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Tickets</a>
+          </li>
+          <li>
+            <a href="#" data-goto="vendor-map" class="text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Vendor Map</a>
+          </li>
+          <li>
+            <a href="#" data-goto="stalls" class="text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors">Stalls</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- say: Thin divider keeps the closing line quiet -->
+    <div class="mt-14 pt-6 border-t border-[var(--border)] flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-sm text-[var(--muted-foreground)]">© 2025 Neon Alley Nights.</p>
+      <p class="text-sm text-[var(--muted-foreground)]">Eat loud, stay late.</p>
+    </div>
+  </div>
+</footer>
+<script>
+// layout: a text panel floated over a map or picture moves beside it when it would cover other text
+(() => {
+  const guard = function swarmLayout(root, report) {
+  const doc = root.ownerDocument || root
+  const view = doc.defaultView
+  // a real sentence or name, not a pin number or a one-word label
+  const prose = el => [...el.querySelectorAll('*'), el].some(x => [...x.childNodes].some(n => n.nodeType === 3 && n.textContent.trim().length >= 12))
+  const area = r => Math.max(0, r.width) * Math.max(0, r.height)
+  const meet = (a, b) => Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) * Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top))
+  // on screen: not hidden, not faded out, not inside a closed <details> menu
+  const shown = el => el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : !el.closest('details:not([open])') && view.getComputedStyle(el).display !== 'none'
+
+  // every visible run of text in a section, with its box
+  function texts(section) {
+    const out = [], walk = doc.createTreeWalker(section, 4)
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (!n.textContent.trim() || !n.parentElement || !shown(n.parentElement)) continue
+      const r = doc.createRange()
+      r.selectNodeContents(n)
+      const b = r.getBoundingClientRect()
+      if (area(b) > 0) out.push({ node: n, box: b })
+    }
+    return out
+  }
+
+  const clip = t => t.replace(/\s+/g, ' ').trim().slice(0, 48)
+  const found = []
+  for (const section of [...root.children]) {
+    // menus and dropdowns in the nav are meant to sit over the page
+    if (/^(SCRIPT|STYLE|LINK|TEMPLATE|NAV|HEADER)$/.test(section.tagName) || section.dataset.layer === 'nav') continue
+    // text panels the design positions absolutely, outermost first
+    const floats = [...section.querySelectorAll('*')].filter(el => !el.dataset.swarmFlow && view.getComputedStyle(el).position === 'absolute' && shown(el) && prose(el))
+    const outer = floats.filter(el => !floats.some(o => o !== el && o.contains(el)))
+    if (!outer.length) continue
+    const runs = texts(section)
+    const after = new Map()
+    for (const el of outer) {
+      const box = el.getBoundingClientRect()
+      // a badge poking out of its card is fine; a panel on top of other text is not
+      const hit = runs.find(t => !el.contains(t.node) && meet(box, t.box) > 0.25 * area(t.box))
+      if (!hit) continue
+      found.push({ layer: section.dataset.layer || null, index: [...root.children].indexOf(section), panel: clip(el.textContent), covers: clip(hit.node.textContent) })
+      if (report) continue
+      const host = el.offsetParent, hb = host?.getBoundingClientRect()
+      el.dataset.swarmFlow = '1'
+      Object.assign(el.style, { position: 'relative', inset: 'auto', transform: 'none', width: 'auto', maxWidth: '100%', zIndex: 'auto' })
+      // inside the section, the panel leaves the box and sits just above or below it
+      if (!host || host === section || !section.contains(host) || host.contains(section)) continue
+      if (box.top + box.height / 2 < hb.top + hb.height / 2 && !after.has(host)) {
+        host.before(el)
+        el.style.margin = '0 0 16px'
+      } else {
+        ;(after.get(host) || host).after(el)
+        after.set(host, el)
+        el.style.margin = '16px 0 0'
+      }
+    }
+  }
+  return found
+}
+  const run = () => guard(document.body)
+  run()
+  document.fonts && document.fonts.ready.then(run)
+  let t
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 150) })
+})()
+
+// motion: sections reveal as they scroll in
+addEventListener('load', () => (function swarmMotion(root, preset) {
+  const p = { gentle: { rise: 18, scale: 1, ms: 750, step: 70, ease: 'cubic-bezier(.2,.7,.2,1)' }, snappy: { rise: 36, scale: 0.96, ms: 520, step: 55, ease: 'cubic-bezier(.34,1.56,.64,1)' } }[preset] || { rise: 18, scale: 1, ms: 750, step: 70, ease: 'ease' }
+  const doc = root.ownerDocument || root
+  const html = doc.documentElement
+  html.style.setProperty('--m-rise', `${p.rise}px`)
+  html.style.setProperty('--m-scale', String(p.scale))
+  html.style.setProperty('--m-ms', `${p.ms}ms`)
+  html.style.setProperty('--m-ease', p.ease)
+  const view = doc.defaultView
+  if (view.matchMedia && view.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const PICK = 'h1,h2,h3,h4,p,img,button,[data-goto],li,article,figure,blockquote,form,table,svg'
+  // the page's top-level blocks are its sections
+  const sections = [...root.children].filter(el => !/^(SCRIPT|STYLE|LINK|TEMPLATE)$/.test(el.tagName))
+  // once revealed, an element drops the reveal so its hover moves without a delay
+  const settle = el => {
+    const done = e => {
+      if (e.target !== el) return
+      el.removeEventListener('transitionend', done)
+      el.classList.remove('m-t', 'm-in')
+      el.style.removeProperty('--m-delay')
+    }
+    el.addEventListener('transitionend', done)
+  }
+  const show = s => s.querySelectorAll('.m-t:not(.m-in)').forEach(el => { settle(el); el.classList.add('m-in') })
+  const io = new view.IntersectionObserver(entries => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue
+      io.unobserve(e.target)
+      show(e.target)
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' })
+  sections.forEach((s, si) => {
+    if (s.dataset.mDone) return
+    s.dataset.mDone = '1'
+    // the nav is there from the start
+    if (/^(nav|header)$/i.test(s.tagName) || s.dataset.layer === 'nav' || (si === 0 && s.querySelector('nav'))) return
+    let n = 0
+    for (const el of s.querySelectorAll(PICK)) {
+      if (n >= 14) break
+      if (el.closest('.m-t') || (el.tagName.toLowerCase() !== 'svg' && el.closest('svg'))) continue
+      // tiny things, and things the design already moves or positions with a transform, stay put
+      if (el.getBoundingClientRect().height < 4 || view.getComputedStyle(el).transform !== 'none') continue
+      el.classList.add('m-t')
+      el.style.setProperty('--m-delay', `${Math.min(n, 10) * p.step}ms`)
+      n++
+    }
+    // the first screen plays as the page opens; the rest as it scrolls in
+    if (s.getBoundingClientRect().top < view.innerHeight * 0.9) view.requestAnimationFrame(() => view.requestAnimationFrame(() => show(s)))
+    else io.observe(s)
+  })
+})(document.body, "snappy"))
+
+// buttons and links made on the canvas name the page they go to
+const pages = {"home":"index.html","tickets":"tickets.html","vendor-map":"vendor-map.html","stalls":"stalls.html"}
+document.addEventListener('click', e => {
+  const go = e.target.closest('[data-goto]')
+  if (go && pages[go.dataset.goto]) { e.preventDefault(); location.href = pages[go.dataset.goto] }
+})
+document.addEventListener('submit', e => e.preventDefault())
+</script>
+</body>
+</html>
